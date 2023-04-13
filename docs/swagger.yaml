@@ -178,7 +178,6 @@ info:
     name: Ahmad Nur Rizal
     url: https://lynk.id/ahmadnurrizal
   description: Final Project Scalable Web Services With Golang
-  termsOfService: http://swagger.io/terms/
   title: MyGram
   version: "1.0"
 paths:

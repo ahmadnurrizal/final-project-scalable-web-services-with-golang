@@ -10,7 +10,6 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Ahmad Nur Rizal",
             "url": "https://lynk.id/ahmadnurrizal",
