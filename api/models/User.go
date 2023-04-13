@@ -23,7 +23,7 @@ type User struct {
 }
 
 type UserLogin struct {
-	Email    string `json:"email" binding:"required" example:"rizalaja"`
+	Email    string `json:"email" binding:"required" example:"rizalaja@gmail.com"`
 	Password string `json:"password" binding:"required" example:"password"`
 }
 

@@ -16,12 +16,9 @@ import (
 // @contact.url   https://lynk.id/ahmadnurrizal
 // @contact.email ahmadnur.rizal45@gmail.com
 
-// @securityDefinitions.apiKey JWT
-// @in                         header
-// @name                       token
-
-// @license.name Apache 2.0
-// @license.url  http://www.apache.org/licenses/LICENSE-2.0.html
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name X-Token
 
 // @host     localhost:8080
 // @BasePath /api/v1

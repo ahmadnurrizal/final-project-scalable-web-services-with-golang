@@ -19,6 +19,14 @@ type Comment struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+type CreateComment struct {
+	Message string `json:"message"  binding:"required"`
+}
+
+type UpdateComment struct {
+	Message string `json:"message"  binding:"required"`
+}
+
 func (p *Comment) Prepare() {
 	p.Message = html.EscapeString(strings.TrimSpace(p.Message))
 	p.User = User{}

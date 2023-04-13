@@ -1,4 +1,124 @@
 definitions:
+  models.Comment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo_id:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.CreateComment:
+    properties:
+      message:
+        type: string
+    required:
+    - message
+    type: object
+  models.CreatePhoto:
+    properties:
+      caption:
+        example: It Ends with Us is a romance novel by Colleen Hoover
+        type: string
+      photo_url:
+        example: https://media.istockphoto.com/id/1322123064/photo/portrait-of-an-adorable-white-cat-in-sunglasses-and-an-shirt-lies-on-a-fabric-hammock.jpg?s=612x612&w=0&k=20&c=-G6l2c4jNI0y4cenh-t3qxvIQzVCOqOYZNvrRA7ZU5o=
+        type: string
+      title:
+        example: It Ends with Us Part 2
+        type: string
+    required:
+    - caption
+    - photo_url
+    - title
+    type: object
+  models.CreateSocialMedia:
+    properties:
+      name:
+        example: mahmuddin
+        type: string
+      socialMediaURL:
+        example: https://www.instagram.com/mhmudnn/
+        type: string
+    required:
+    - name
+    - socialMediaURL
+    type: object
+  models.Photo:
+    properties:
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.SocialMedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      socialMediaURL:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.UpdateComment:
+    properties:
+      message:
+        type: string
+    required:
+    - message
+    type: object
+  models.UpdatePhoto:
+    properties:
+      caption:
+        example: It Ends with Us is a romance novel by Colleen Hoover updated
+        type: string
+      photo_url:
+        example: https://media.istockphoto.com/id/1322123064/photo/portrait-of-an-adorable-white-cat-in-sunglasses-and-an-shirt-lies-on-a-fabric-hammock.jpg?s=612x612&w=0&k=20&c=-G6l2c4jNI0y4cenh-t3qxvIQzVCOqOYZNvrRA7ZU5o=
+        type: string
+      title:
+        example: It Ends with Us Part 2 updated
+        type: string
+    required:
+    - caption
+    - photo_url
+    - title
+    type: object
+  models.UpdateSocialMedia:
+    properties:
+      name:
+        example: mahmuddin updated
+        type: string
+      socialMediaURL:
+        example: https://www.instagram.com/mhmudnn/
+        type: string
+    type: object
   models.User:
     properties:
       age:
@@ -19,7 +139,7 @@ definitions:
   models.UserLogin:
     properties:
       email:
-        example: rizalaja
+        example: rizalaja@gmail.com
         type: string
       password:
         example: password
@@ -51,6 +171,111 @@ definitions:
 info:
   contact: {}
 paths:
+  /comments:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all comment
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Comment'
+            type: array
+      summary: Get All Comment
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: Add a new Comment
+      parameters:
+      - description: Comment Data
+        in: body
+        name: CreateComment
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateComment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Create Comment
+      tags:
+      - Comment
+  /comments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Comment deleted
+          schema:
+            type: string
+      summary: Delete Comment by ID
+      tags:
+      - Comment
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Get Comment by ID
+      tags:
+      - Comment
+    put:
+      consumes:
+      - application/json
+      description: Update a comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment Data
+        in: body
+        name: UpdateComment
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateComment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Update Comment by ID
+      tags:
+      - Comment
   /login:
     post:
       consumes:
@@ -72,7 +297,212 @@ paths:
             $ref: '#/definitions/models.UserLogin'
       summary: Login
       tags:
-      - user
+      - User
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all photos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Photo'
+            type: array
+      summary: Get All Photos
+      tags:
+      - Photo
+    post:
+      consumes:
+      - application/json
+      description: Add a new Photo
+      parameters:
+      - description: Photo Data
+        in: body
+        name: CreatePhoto
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreatePhoto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Create Photo
+      tags:
+      - Photo
+  /photos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Photo deleted
+          schema:
+            type: string
+      summary: Delete Photo by ID
+      tags:
+      - Photo
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Get Photo by ID
+      tags:
+      - Photo
+    put:
+      consumes:
+      - application/json
+      description: Update a photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Photo Data
+        in: body
+        name: UpdatePhoto
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdatePhoto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Update Photo by ID
+      tags:
+      - Photo
+  /social-media:
+    post:
+      consumes:
+      - application/json
+      description: Add a new Social Media
+      parameters:
+      - description: SocialMedia Data
+        in: body
+        name: CreateSocialMedia
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateSocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Create Social Media
+      tags:
+      - Social Media
+  /social-media-all:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve all social media
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.SocialMedia'
+            type: array
+      summary: Get All Social Media
+      tags:
+      - Social Media
+  /social-media/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a social media by ID
+      parameters:
+      - description: SocialMedia ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Social Media deleted
+          schema:
+            type: string
+      summary: Delete social media by ID
+      tags:
+      - Social Media
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a social media by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Get Social Media by ID
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: Update a social Media by ID
+      parameters:
+      - description: SocialMedia ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: SocialMedia Data
+        in: body
+        name: UpdateSocialMedia
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateSocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Update Social Media by ID
+      tags:
+      - Social Media
   /users:
     post:
       consumes:
@@ -94,5 +524,5 @@ paths:
             $ref: '#/definitions/models.User'
       summary: Register User
       tags:
-      - user
+      - User
 swagger: "2.0"

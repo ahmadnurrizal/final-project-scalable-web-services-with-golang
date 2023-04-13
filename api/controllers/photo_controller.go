@@ -13,6 +13,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreatePhoto godoc
+// @Summary     Create Photo
+// @Description Add a new Photo
+// @Tags        Photo
+// @Accept      json
+// @Produce     json
+// @Param       CreatePhoto body models.CreatePhoto true "Photo Data"
+// @Success     200  {object} models.Photo
+// @Router      /photos [post]
 func (server *Server) CreatePhoto(c *gin.Context) {
 
 	//clear previous error if any
@@ -88,6 +97,14 @@ func (server *Server) CreatePhoto(c *gin.Context) {
 	})
 }
 
+// GetPhotos godoc
+// @Summary Get All Photos
+// @Description Retrieve all photos
+// @Tags Photo
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.Photo
+// @Router /photos [get]
 func (server *Server) GetPhotos(c *gin.Context) {
 
 	photo := models.Photo{}
@@ -107,6 +124,15 @@ func (server *Server) GetPhotos(c *gin.Context) {
 	})
 }
 
+// GetPhotoByID godoc
+// @Summary Get Photo by ID
+// @Description Retrieve a photo by ID
+// @Tags Photo
+// @Accept json
+// @Produce json
+// @Param id path int true "Photo ID"
+// @Success 200 {object} models.Photo
+// @Router /photos/{id} [get]
 func (server *Server) GetPhoto(c *gin.Context) {
 
 	photoID := c.Param("id")
@@ -137,6 +163,16 @@ func (server *Server) GetPhoto(c *gin.Context) {
 	})
 }
 
+// UpdatePhotoByID godoc
+// @Summary Update Photo by ID
+// @Description Update a photo by ID
+// @Tags Photo
+// @Accept json
+// @Produce json
+// @Param id path int true "Photo ID"
+// @Param UpdatePhoto body models.UpdatePhoto true "Photo Data"
+// @Success 200 {object} models.Photo
+// @Router /photos/{id} [put]
 func (server *Server) UpdatePhoto(c *gin.Context) {
 
 	//clear previous error if any
@@ -231,6 +267,15 @@ func (server *Server) UpdatePhoto(c *gin.Context) {
 	})
 }
 
+// DeletePhotoByID godoc
+// @Summary Delete Photo by ID
+// @Description Delete a photo by ID
+// @Tags Photo
+// @Accept json
+// @Produce json
+// @Param id path int true "Photo ID"
+// @Success 200 {string} string "Photo deleted"
+// @Router /photos/{id} [delete]
 func (server *Server) DeletePhoto(c *gin.Context) {
 
 	photoID := c.Param("id")

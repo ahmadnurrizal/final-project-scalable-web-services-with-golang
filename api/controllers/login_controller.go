@@ -17,7 +17,7 @@ import (
 // Login godoc
 // @Summary     Login
 // @Description Login for User
-// @Tags        user
+// @Tags        User
 // @Accept      json
 // @Produce     json
 // @Param       user body     models.UserLogin true "User Data"

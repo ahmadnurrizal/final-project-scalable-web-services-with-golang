@@ -13,6 +13,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateSocialMedia godoc
+// @Summary     Create Social Media
+// @Description Add a new Social Media
+// @Tags        Social Media
+// @Accept      json
+// @Produce     json
+// @Param       CreateSocialMedia body models.CreateSocialMedia true "SocialMedia Data"
+// @Success     200  {object} models.SocialMedia
+// @Router      /social-media [post]
 func (server *Server) CreateSocialMedia(c *gin.Context) {
 
 	//clear previous error if any
@@ -88,6 +97,14 @@ func (server *Server) CreateSocialMedia(c *gin.Context) {
 	})
 }
 
+// GetSocialMediaAll godoc
+// @Summary Get All Social Media
+// @Description Retrieve all social media
+// @Tags Social Media
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.SocialMedia
+// @Router /social-media-all [get]
 func (server *Server) GetSocialMediaAll(c *gin.Context) {
 
 	socialMedia := models.SocialMedia{}
@@ -107,6 +124,14 @@ func (server *Server) GetSocialMediaAll(c *gin.Context) {
 	})
 }
 
+// GetSocialMediaByID godoc
+// @Summary Get Social Media by ID
+// @Description Retrieve a social media by ID
+// @Tags Social Media
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media/{id} [get]
 func (server *Server) GetSocialMedia(c *gin.Context) {
 
 	socialMediaID := c.Param("id")
@@ -137,6 +162,16 @@ func (server *Server) GetSocialMedia(c *gin.Context) {
 	})
 }
 
+// UpdateSocialMediaByID godoc
+// @Summary Update Social Media by ID
+// @Description Update a social Media by ID
+// @Tags Social Media
+// @Accept json
+// @Produce json
+// @Param id path int true "SocialMedia ID"
+// @Param UpdateSocialMedia body models.UpdateSocialMedia true "SocialMedia Data"
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media/{id} [put]
 func (server *Server) UpdateSocialMedia(c *gin.Context) {
 
 	//clear previous error if any
@@ -231,6 +266,15 @@ func (server *Server) UpdateSocialMedia(c *gin.Context) {
 	})
 }
 
+// DeleteSocialMediaByID godoc
+// @Summary Delete social media by ID
+// @Description Delete a social media by ID
+// @Tags Social Media
+// @Accept json
+// @Produce json
+// @Param id path int true "SocialMedia ID"
+// @Success 200 {string} string "Social Media deleted"
+// @Router /social-media/{id} [delete]
 func (server *Server) DeleteSocialMedia(c *gin.Context) {
 
 	socialMediaID := c.Param("id")

@@ -19,6 +19,16 @@ type SocialMedia struct {
 	UpdatedAt      time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+type CreateSocialMedia struct {
+	Name           string `json:"name" binding:"required" example:"mahmuddin"`
+	SocialMediaURL string `json:"socialMediaURL" binding:"required" example:"https://www.instagram.com/mhmudnn/"`
+}
+
+type UpdateSocialMedia struct {
+	Name           string `json:"name" example:"mahmuddin updated"`
+	SocialMediaURL string `json:"socialMediaURL" example:"https://www.instagram.com/mhmudnn/"`
+}
+
 func (p *SocialMedia) Prepare() {
 	p.Name = html.EscapeString(strings.TrimSpace(p.Name))
 	p.SocialMediaURL = html.EscapeString(strings.TrimSpace(p.SocialMediaURL))

@@ -14,7 +14,7 @@ import (
 // RegisterUser godoc
 // @Summary     Register User
 // @Description Add a new User
-// @Tags        user
+// @Tags        User
 // @Accept      json
 // @Produce     json
 // @Param       UserRegister body models.UserRegister true "User Data"

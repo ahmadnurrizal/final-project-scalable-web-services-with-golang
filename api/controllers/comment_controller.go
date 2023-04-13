@@ -13,6 +13,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateComment godoc
+// @Summary     Create Comment
+// @Description Add a new Comment
+// @Tags        Comment
+// @Accept      json
+// @Produce     json
+// @Param       CreateComment body models.CreateComment true "Comment Data"
+// @Success     200  {object} models.Comment
+// @Router      /comments [post]
 func (server *Server) CreateComment(c *gin.Context) {
 
 	//clear previous error if any
@@ -113,6 +122,14 @@ func (server *Server) CreateComment(c *gin.Context) {
 	})
 }
 
+// GetComments godoc
+// @Summary Get All Comment
+// @Description Retrieve all comment
+// @Tags Comment
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.Comment
+// @Router /comments [get]
 func (server *Server) GetComments(c *gin.Context) {
 
 	comment := models.Comment{}
@@ -132,6 +149,15 @@ func (server *Server) GetComments(c *gin.Context) {
 	})
 }
 
+// GetCommentByID godoc
+// @Summary Get Comment by ID
+// @Description Retrieve a comment by ID
+// @Tags Comment
+// @Accept json
+// @Produce json
+// @Param id path int true "Comment ID"
+// @Success 200 {object} models.Comment
+// @Router /comments/{id} [get]
 func (server *Server) GetComment(c *gin.Context) {
 
 	commentID := c.Param("id")
@@ -162,6 +188,16 @@ func (server *Server) GetComment(c *gin.Context) {
 	})
 }
 
+// UpdateCommentByID godoc
+// @Summary Update Comment by ID
+// @Description Update a comment by ID
+// @Tags Comment
+// @Accept json
+// @Produce json
+// @Param id path int true "Comment ID"
+// @Param UpdateComment body models.UpdateComment true "Comment Data"
+// @Success 200 {object} models.Comment
+// @Router /comments/{id} [put]
 func (server *Server) UpdateComment(c *gin.Context) {
 
 	//clear previous error if any
@@ -256,6 +292,15 @@ func (server *Server) UpdateComment(c *gin.Context) {
 	})
 }
 
+// DeleteCommentByID godoc
+// @Summary Delete Comment by ID
+// @Description Delete a comment by ID
+// @Tags Comment
+// @Accept json
+// @Produce json
+// @Param id path int true "Comment ID"
+// @Success 200 {string} string "Comment deleted"
+// @Router /comments/{id} [delete]
 func (server *Server) DeleteComment(c *gin.Context) {
 
 	commentID := c.Param("id")
