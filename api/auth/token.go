@@ -53,8 +53,15 @@ func ExtractToken(r *http.Request) string {
 	}
 	// Get token from Authorization header
 	bearerToken := r.Header.Get("Authorization")
-	if len(strings.Split(bearerToken, " ")) == 2 {
-		return strings.Split(bearerToken, " ")[1]
+	tokenParts := strings.Split(bearerToken, " ")
+	// If tokenParts has length of 2, it means "Bearer" prefix is present
+	if len(tokenParts) == 2 {
+		return tokenParts[1]
+	}
+
+	// If tokenParts has length of 1, it means "Bearer" prefix is not present
+	if len(tokenParts) == 1 {
+		return tokenParts[0]
 	}
 	// If token is not found in query or header, return empty string
 	return ""

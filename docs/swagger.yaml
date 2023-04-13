@@ -1,3 +1,4 @@
+basePath: /api/v1
 definitions:
   models.Comment:
     properties:
@@ -19,6 +20,7 @@ definitions:
   models.CreateComment:
     properties:
       message:
+        example: hi there!!
         type: string
     required:
     - message
@@ -90,6 +92,7 @@ definitions:
   models.UpdateComment:
     properties:
       message:
+        example: hi there!! updated
         type: string
     required:
     - message
@@ -168,8 +171,16 @@ definitions:
     - password
     - username
     type: object
+host: localhost:8080
 info:
-  contact: {}
+  contact:
+    email: ahmadnur.rizal45@gmail.com
+    name: Ahmad Nur Rizal
+    url: https://lynk.id/ahmadnurrizal
+  description: Final Project Scalable Web Services With Golang
+  termsOfService: http://swagger.io/terms/
+  title: MyGram
+  version: "1.0"
 paths:
   /comments:
     get:
@@ -186,27 +197,6 @@ paths:
               $ref: '#/definitions/models.Comment'
             type: array
       summary: Get All Comment
-      tags:
-      - Comment
-    post:
-      consumes:
-      - application/json
-      description: Add a new Comment
-      parameters:
-      - description: Comment Data
-        in: body
-        name: CreateComment
-        required: true
-        schema:
-          $ref: '#/definitions/models.CreateComment'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.Comment'
-      summary: Create Comment
       tags:
       - Comment
   /comments/{id}:
@@ -227,6 +217,8 @@ paths:
           description: Comment deleted
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Delete Comment by ID
       tags:
       - Comment
@@ -248,6 +240,34 @@ paths:
           schema:
             $ref: '#/definitions/models.Comment'
       summary: Get Comment by ID
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: Add a new Comment
+      parameters:
+      - description: Comment Data
+        in: body
+        name: CreateComment
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateComment'
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      security:
+      - ApiKeyAuth: []
+      summary: Create Comment
       tags:
       - Comment
     put:
@@ -273,6 +293,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - ApiKeyAuth: []
       summary: Update Comment by ID
       tags:
       - Comment
@@ -333,6 +355,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - ApiKeyAuth: []
       summary: Create Photo
       tags:
       - Photo
@@ -354,6 +378,8 @@ paths:
           description: Photo deleted
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Delete Photo by ID
       tags:
       - Photo
@@ -400,6 +426,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - ApiKeyAuth: []
       summary: Update Photo by ID
       tags:
       - Photo
@@ -422,6 +450,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - ApiKeyAuth: []
       summary: Create Social Media
       tags:
       - Social Media
@@ -460,6 +490,8 @@ paths:
           description: Social Media deleted
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Delete social media by ID
       tags:
       - Social Media
@@ -467,6 +499,12 @@ paths:
       consumes:
       - application/json
       description: Retrieve a social media by ID
+      parameters:
+      - description: SocialMedia ID
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -500,6 +538,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - ApiKeyAuth: []
       summary: Update Social Media by ID
       tags:
       - Social Media
@@ -525,4 +565,11 @@ paths:
       summary: Register User
       tags:
       - User
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

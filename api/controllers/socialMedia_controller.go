@@ -20,6 +20,7 @@ import (
 // @Accept      json
 // @Produce     json
 // @Param       CreateSocialMedia body models.CreateSocialMedia true "SocialMedia Data"
+// @Security ApiKeyAuth
 // @Success     200  {object} models.SocialMedia
 // @Router      /social-media [post]
 func (server *Server) CreateSocialMedia(c *gin.Context) {
@@ -130,6 +131,7 @@ func (server *Server) GetSocialMediaAll(c *gin.Context) {
 // @Tags Social Media
 // @Accept json
 // @Produce json
+// @Param id path int true "SocialMedia ID"
 // @Success 200 {object} models.SocialMedia
 // @Router /social-media/{id} [get]
 func (server *Server) GetSocialMedia(c *gin.Context) {
@@ -170,6 +172,7 @@ func (server *Server) GetSocialMedia(c *gin.Context) {
 // @Produce json
 // @Param id path int true "SocialMedia ID"
 // @Param UpdateSocialMedia body models.UpdateSocialMedia true "SocialMedia Data"
+// @Security ApiKeyAuth
 // @Success 200 {object} models.SocialMedia
 // @Router /social-media/{id} [put]
 func (server *Server) UpdateSocialMedia(c *gin.Context) {
@@ -273,6 +276,7 @@ func (server *Server) UpdateSocialMedia(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path int true "SocialMedia ID"
+// @Security ApiKeyAuth
 // @Success 200 {string} string "Social Media deleted"
 // @Router /social-media/{id} [delete]
 func (server *Server) DeleteSocialMedia(c *gin.Context) {

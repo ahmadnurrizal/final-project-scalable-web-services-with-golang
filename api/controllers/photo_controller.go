@@ -20,6 +20,7 @@ import (
 // @Accept      json
 // @Produce     json
 // @Param       CreatePhoto body models.CreatePhoto true "Photo Data"
+// @Security ApiKeyAuth
 // @Success     200  {object} models.Photo
 // @Router      /photos [post]
 func (server *Server) CreatePhoto(c *gin.Context) {
@@ -171,6 +172,7 @@ func (server *Server) GetPhoto(c *gin.Context) {
 // @Produce json
 // @Param id path int true "Photo ID"
 // @Param UpdatePhoto body models.UpdatePhoto true "Photo Data"
+// @Security ApiKeyAuth
 // @Success 200 {object} models.Photo
 // @Router /photos/{id} [put]
 func (server *Server) UpdatePhoto(c *gin.Context) {
@@ -274,6 +276,7 @@ func (server *Server) UpdatePhoto(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path int true "Photo ID"
+// @Security ApiKeyAuth
 // @Success 200 {string} string "Photo deleted"
 // @Router /photos/{id} [delete]
 func (server *Server) DeletePhoto(c *gin.Context) {

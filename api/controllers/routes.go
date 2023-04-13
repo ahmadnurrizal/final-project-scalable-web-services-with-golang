@@ -7,23 +7,6 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title          MyGram
-// @version        1.0
-// @description    Final Project Scalable Web Services With Golang
-// @termsOfService http://swagger.io/terms/
-
-// @contact.name  Ahmad Nur Rizal
-// @contact.url   https://lynk.id/ahmadnurrizal
-// @contact.email ahmadnur.rizal45@gmail.com
-
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name X-Token
-
-// @host     localhost:8080
-// @BasePath /api/v1
-
-// @schemes http
 func (s *Server) initializeRoutes() {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := s.Router.Group("/api/v1")
@@ -53,5 +36,6 @@ func (s *Server) initializeRoutes() {
 		v1.PUT("/social-media/:id", middlewares.TokenAuthMiddleware(), s.UpdateSocialMedia)
 		v1.DELETE("/social-media/:id", middlewares.TokenAuthMiddleware(), s.DeleteSocialMedia)
 	}
+
 	s.Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }

@@ -10,7 +10,12 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Ahmad Nur Rizal",
+            "url": "https://lynk.id/ahmadnurrizal",
+            "email": "ahmadnur.rizal45@gmail.com"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -37,38 +42,6 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/models.Comment"
                             }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "Add a new Comment",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Comment"
-                ],
-                "summary": "Create Comment",
-                "parameters": [
-                    {
-                        "description": "Comment Data",
-                        "name": "CreateComment",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.CreateComment"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Comment"
                         }
                     }
                 }
@@ -106,6 +79,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a comment by ID",
                 "consumes": [
                     "application/json"
@@ -144,7 +122,56 @@ const docTemplate = `{
                     }
                 }
             },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new Comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Create Comment",
+                "parameters": [
+                    {
+                        "description": "Comment Data",
+                        "name": "CreateComment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateComment"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                }
+            },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a comment by ID",
                 "consumes": [
                     "application/json"
@@ -235,6 +262,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a new Photo",
                 "consumes": [
                     "application/json"
@@ -299,6 +331,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a photo by ID",
                 "consumes": [
                     "application/json"
@@ -338,6 +375,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a photo by ID",
                 "consumes": [
                     "application/json"
@@ -370,6 +412,11 @@ const docTemplate = `{
         },
         "/social-media": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a new Social Media",
                 "consumes": [
                     "application/json"
@@ -441,6 +488,15 @@ const docTemplate = `{
                     "Social Media"
                 ],
                 "summary": "Get Social Media by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "SocialMedia ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -451,6 +507,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a social Media by ID",
                 "consumes": [
                     "application/json"
@@ -490,6 +551,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a social media by ID",
                 "consumes": [
                     "application/json"
@@ -589,7 +655,8 @@ const docTemplate = `{
             ],
             "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "hi there!!"
                 }
             }
         },
@@ -694,7 +761,8 @@ const docTemplate = `{
             ],
             "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "hi there!! updated"
                 }
             }
         },
@@ -803,17 +871,24 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/api/v1",
+	Schemes:          []string{"http"},
+	Title:            "MyGram",
+	Description:      "Final Project Scalable Web Services With Golang",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

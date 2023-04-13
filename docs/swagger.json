@@ -1,8 +1,21 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Final Project Scalable Web Services With Golang",
+        "title": "MyGram",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Ahmad Nur Rizal",
+            "url": "https://lynk.id/ahmadnurrizal",
+            "email": "ahmadnur.rizal45@gmail.com"
+        },
+        "version": "1.0"
     },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
     "paths": {
         "/comments": {
             "get": {
@@ -25,38 +38,6 @@
                             "items": {
                                 "$ref": "#/definitions/models.Comment"
                             }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "Add a new Comment",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Comment"
-                ],
-                "summary": "Create Comment",
-                "parameters": [
-                    {
-                        "description": "Comment Data",
-                        "name": "CreateComment",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.CreateComment"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Comment"
                         }
                     }
                 }
@@ -94,6 +75,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a comment by ID",
                 "consumes": [
                     "application/json"
@@ -132,7 +118,56 @@
                     }
                 }
             },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a new Comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Create Comment",
+                "parameters": [
+                    {
+                        "description": "Comment Data",
+                        "name": "CreateComment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateComment"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                }
+            },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a comment by ID",
                 "consumes": [
                     "application/json"
@@ -223,6 +258,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a new Photo",
                 "consumes": [
                     "application/json"
@@ -287,6 +327,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a photo by ID",
                 "consumes": [
                     "application/json"
@@ -326,6 +371,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a photo by ID",
                 "consumes": [
                     "application/json"
@@ -358,6 +408,11 @@
         },
         "/social-media": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a new Social Media",
                 "consumes": [
                     "application/json"
@@ -429,6 +484,15 @@
                     "Social Media"
                 ],
                 "summary": "Get Social Media by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "SocialMedia ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -439,6 +503,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a social Media by ID",
                 "consumes": [
                     "application/json"
@@ -478,6 +547,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a social media by ID",
                 "consumes": [
                     "application/json"
@@ -577,7 +651,8 @@
             ],
             "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "hi there!!"
                 }
             }
         },
@@ -682,7 +757,8 @@
             ],
             "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "hi there!! updated"
                 }
             }
         },
@@ -790,6 +866,13 @@
                     "example": "rizalaja"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

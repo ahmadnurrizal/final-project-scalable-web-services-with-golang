@@ -20,11 +20,11 @@ type Comment struct {
 }
 
 type CreateComment struct {
-	Message string `json:"message"  binding:"required"`
+	Message string `json:"message"  binding:"required" example:"hi there!!"`
 }
 
 type UpdateComment struct {
-	Message string `json:"message"  binding:"required"`
+	Message string `json:"message"  binding:"required" example:"hi there!! updated"`
 }
 
 func (p *Comment) Prepare() {

@@ -20,8 +20,10 @@ import (
 // @Accept      json
 // @Produce     json
 // @Param       CreateComment body models.CreateComment true "Comment Data"
+// @Param id path int true "Comment ID"
+// @Security ApiKeyAuth
 // @Success     200  {object} models.Comment
-// @Router      /comments [post]
+// @Router      /comments/{id} [post]
 func (server *Server) CreateComment(c *gin.Context) {
 
 	//clear previous error if any
@@ -196,6 +198,7 @@ func (server *Server) GetComment(c *gin.Context) {
 // @Produce json
 // @Param id path int true "Comment ID"
 // @Param UpdateComment body models.UpdateComment true "Comment Data"
+// @Security ApiKeyAuth
 // @Success 200 {object} models.Comment
 // @Router /comments/{id} [put]
 func (server *Server) UpdateComment(c *gin.Context) {
@@ -299,6 +302,7 @@ func (server *Server) UpdateComment(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path int true "Comment ID"
+// @Security ApiKeyAuth
 // @Success 200 {string} string "Comment deleted"
 // @Router /comments/{id} [delete]
 func (server *Server) DeleteComment(c *gin.Context) {
