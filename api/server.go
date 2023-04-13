@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/ahmadnurrizal/final-project-scalable-web-services-with-golang/api/controllers"
+	"github.com/ahmadnurrizal/final-project-scalable-web-services-with-golang/api/seed"
+	_ "github.com/ahmadnurrizal/final-project-scalable-web-services-with-golang/api/seed"
 	"github.com/joho/godotenv"
 )
 
