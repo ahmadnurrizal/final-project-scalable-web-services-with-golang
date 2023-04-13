@@ -31,7 +31,7 @@ func Run() {
 	server.Initialize(os.Getenv("DB_DRIVER"), os.Getenv("PGUSER"), os.Getenv("PGPASSWORD"), os.Getenv("PGPORT"), os.Getenv("PGHOST"), os.Getenv("PGDATABASE"))
 
 	// This is for testing, when done, do well to comment
-	// seed.Load(server.DB)
+	seed.Load(server.DB)
 
 	apiPort := fmt.Sprintf("%s:%s", os.Getenv("APP_HOST"), os.Getenv("PORT"))
 	fmt.Printf("Listening to port %s", apiPort)
