@@ -11,6 +11,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// RegisterUser godoc
+// @Summary     Register User
+// @Description Add a new User
+// @Tags        user
+// @Accept      json
+// @Produce     json
+// @Param       UserRegister body models.UserRegister true "User Data"
+// @Success     200  {object} models.User
+// @Router      /users [post]
 func (server *Server) Register(c *gin.Context) {
 
 	//clear previous error if any

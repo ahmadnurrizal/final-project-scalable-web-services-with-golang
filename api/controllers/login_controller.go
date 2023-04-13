@@ -14,6 +14,15 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Login godoc
+// @Summary     Login
+// @Description Login for User
+// @Tags        user
+// @Accept      json
+// @Produce     json
+// @Param       user body     models.UserLogin true "User Data"
+// @Success     200  {object} models.UserLogin
+// @Router      /login [post]
 func (server *Server) Login(c *gin.Context) {
 
 	//clear previous error if any

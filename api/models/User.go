@@ -22,6 +22,18 @@ type User struct {
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
+type UserLogin struct {
+	Email    string `json:"email" binding:"required" example:"rizalaja"`
+	Password string `json:"password" binding:"required" example:"password"`
+}
+
+type UserRegister struct {
+	Username string `json:"username" binding:"required" example:"rizalaja"`
+	Email    string `json:"email" binding:"required" example:"rizalaja@gmail.com"`
+	Password string `json:"password" binding:"required" example:"password"`
+	Age      uint32 `json:"age" binding:"required" example:"23"`
+}
+
 func (u *User) BeforeSave() error {
 	hashedPassword, err := security.Hash(u.Password)
 	if err != nil {
